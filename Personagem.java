@@ -2,9 +2,26 @@ public class Personagem{
   //variáveis de instância
   //instância é sinônimo de objeto
   String nome;
-  int energia;
-  int fome;
-  int sono;
+  private int energia = 10;
+  private int fome = 0;
+  private int sono = 0;
+  private int item = 0;
+  
+  //construtor padrão
+  Personagem(){
+    System.out.println("Construindo um personagem");
+  }
+  Personagem(int energia, int fome, int sono){
+    if (energia >= 0 && energia <= 10)
+     this.energia = energia;
+    this.fome = fome > 10 || fome < 0 ? this.fome : fome;
+    if (sono >= 0 && sono <= 10)
+      this.sono = sono;
+  }
+
+  Personagem(String nome){
+    this.nome = nome;
+  }
   //tipo de retorno
   //nome
   //lista de parâmetros
@@ -12,6 +29,7 @@ public class Personagem{
   void cacar(){
     if (energia >= 2){
       energia = energia - 2; // energia -= 2;
+      item = item + 1;
       System.out.println(nome + " caçando");
     }
     else{
@@ -21,7 +39,7 @@ public class Personagem{
     sono = sono + 1 > 10 ? 10 : sono + 1;
   }
   void comer(){
-    if (fome >= 1){
+    if (fome >= 1 && item >=1){
       System.out.printf("%s comendo\n", nome);
       --fome;
       energia = Math.min(energia + 1, 10);
@@ -48,7 +66,8 @@ public class Personagem{
       nome,
       energia,
       fome,
-      sono
+      sono,
+      item
     );
   }
 }
